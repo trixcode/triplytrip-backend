@@ -36,10 +36,18 @@ router.post('/', async (req, res) => {
     return res.status(400).send(e)
   }
 });
-router.get('/:id', (req, res)=>{
+router.get('/:id', (req, res) => {
   Users.findById(req.params.id)
     .then(result => res.send(result))
     .catch(() => res.sendStatus(500))
+});
+router.patch('/:id', (req, res) => {
+  Users.findById(req.params.id, (err, user)=>{
+    user.set(req.body);
+    user.save((saveErr, updatedUser)=>{
+      res.send({updatedUser})
+    })
+  })
 })
 
 
