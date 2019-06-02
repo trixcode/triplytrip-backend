@@ -35,6 +35,11 @@ router.post('/', async (req, res) => {
   } catch (e) {
     return res.status(400).send(e)
   }
+});
+router.get('/:id', (req, res)=>{
+  Users.findById(req.params.id)
+    .then(result => res.send(result))
+    .catch(() => res.sendStatus(500))
 })
 
 
