@@ -66,6 +66,14 @@ router.put('/:id', (req, res) => {
       res.send({ updatedUser });
     });
   })
+});
+
+router.delete('/:id', (req, res)=> {
+  Users.findById(req.params.id, (err, user)=>{
+    user.remove((userErr, removeUser)=>{
+      res.send('Delete user');
+    })
+  })
 })
 
 
