@@ -23,7 +23,7 @@ const UsersSchema = new Schema({
       validator: async function (value) {
         if (!this.isModified('username')) return;
 
-        const user = await UserModule.findOne({username: value});
+        const user = await usersModels.findOne({username: value});
 
         if (user) throw new Error();
       },
@@ -35,7 +35,8 @@ const UsersSchema = new Schema({
     required: true
   },
   token: {
-
+    type: String,
+    required: true
   },
   email: {
     type: String,
@@ -46,25 +47,22 @@ const UsersSchema = new Schema({
     required: true
   },
   dateOfBirth: {
-    type: Date,
+    type: String,
     required: true
   },
   avatar: String,
-  userCategory: {
+  roles: {
     type: String,
     required: true,
-    default: 'user',
-    enum: ['user', 'moderator', 'admin']
+    default: "user",
+    enum: ["user", "admin"]
   },
   createData: {
     type: String,
     required: true,
     default: new Date()
   },
-  updatedDate: {
-    type: String,
-    required: true
-  }
+  updatedDate: String
 });
 
 UsersSchema.methods.generateToken = function () {
@@ -74,14 +72,19 @@ UsersSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password)
 };
 UsersSchema.pre('save', async function (next) {
-  if (!isModified) return next();
+  if (!this.isModified('password')) return next();
 
-  const salt = bcrypt.genSalt(SALT_WORK_FACTOR);
-  const hash = bcrypt.hash(this.password, salt);
+  const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+  const hash = await bcrypt.hash(this.password, salt);
   this.password = hash;
-  return next
+  return next()
 });
-
+UsersSchema.set('toJSON', {
+  transform: (doc, ret, options) => {
+    delete ret.password;
+    return ret;
+  }
+});
 const usersModels = mongoose.model('Users', UsersSchema);
 
-model.exports = usersModels;
+module.exports = usersModels;

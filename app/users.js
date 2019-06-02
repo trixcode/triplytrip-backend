@@ -1,8 +1,9 @@
 const express = require('express');
 const multer = require('multer');
 const nanoid = require('nanoid');
+const Users = require('../models/Users');
 
-const router = express.Router();
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb)=>{
@@ -14,12 +15,27 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage});
+const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('user')
+  Users.find()
+    .then(result => res.send(result))
+    .catch(() => res.sendStatus(500))
 });
 
-
+router.post('/', async (req, res) => {
+  const user = new Users(req.body);
+  user.generateToken();
+  if (req.file){
+    user.photo = req.file.filename;
+  }
+  try {
+    await user.save();
+    return res.send({_id: user._id, username: user.username});
+  } catch (e) {
+    return res.status(400).send(e)
+  }
+})
 
 
 

@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { mongoOptions, dbURL } = require('./config');
-const user = require('./app/users');
+const users = require('./app/users');
 
 const app = express();
 const port = 8000;
@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 mongoose.connect(dbURL, mongoOptions).then(()=>{
   console.log('MongoDB started!');
-  app.use('/users', user);
+  app.use('/users', users);
 
 
   app.listen(port, ()=>{
