@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
   const user = new Users(req.body);
   user.generateToken();
   if (req.file){
-    user.photo = req.file.filename;
+    user.avatar = req.file.filename;
   }
   try {
     await user.save();
@@ -36,19 +36,38 @@ router.post('/', async (req, res) => {
     return res.status(400).send(e)
   }
 });
+
 router.get('/:id', (req, res) => {
   Users.findById(req.params.id)
     .then(result => res.send(result))
     .catch(() => res.sendStatus(500))
 });
+
 router.patch('/:id', (req, res) => {
   Users.findById(req.params.id, (err, user)=>{
-    user.set(req.body);
+    user.set({...req.body, updatedDate: new Date()});
     user.save((saveErr, updatedUser)=>{
       res.send({updatedUser})
     })
   })
+});
+
+router.put('/:id', (req, res) => {
+  Users.findById(req.params.id, (err, user)=>{
+    if (req.file){
+      user.avatar = req.file.filename
+    }
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.dateOfBirth = req.body.dateOfBirth;
+    user.phone = req.body.phone;
+    user.updatedDate = new Date();
+    user.save((saveErr, updatedUser) => {
+      res.send({ updatedUser });
+    });
+  })
 })
+
 
 
 
