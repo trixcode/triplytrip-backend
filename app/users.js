@@ -74,7 +74,43 @@ router.delete('/:id', (req, res)=> {
       res.send('Delete user');
     })
   })
-})
+});
+router.post('/sessions', async (req, res)=>{
+  const user = await Users.findOne({username: req.body.username});
+
+  if (!user) {
+    return res.status(400).send({error: "Username or Password is wrong"})
+  }
+
+  const isMatch = await user.checkPassword(req.body.password);
+  if (!isMatch){
+    return res.status(400).send({error: "Username or Password is wrong"})
+  }
+
+  user.generateToken();
+  await user.save();
+
+  res.send({token: user.token})
+});
+router.delete('/sessions', async (req, res) => {
+  const token = req.get('Token');
+  const success = {message: 'Logged out'};
+
+  if (!token) {
+    return res.send(success);
+  }
+
+  const user = await Users.findOne({token});
+
+  if (!user) {
+    return res.send(success);
+  }
+
+  user.generateToken();
+  await  user.save();
+
+  return res.send(success);
+});
 
 
 
