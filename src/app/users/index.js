@@ -1,8 +1,9 @@
 const express = require('express');
 const multer = require('multer');
 const nanoid = require('nanoid');
-const Users = require('../models/Users');
-
+const Users = require('../../models/Users');
+const jwt = require('jsonwebtoken');
+const verifyToken = require('../../middleware/verifyToken/index');
 
 
 const storage = multer.diskStorage({
@@ -17,13 +18,21 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  Users.find()
-    .then(result => res.send(result))
-    .catch(() => res.sendStatus(500))
-});
+router.get('/', verifyToken, (req, res) => {
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      res.json({
+        message: 'Get Users',
+        authData
+      });
+    }
+  })
+})
 
-router.post('/', async (req, res) => {
+
+router.post('/register', async (req, res) => {
   const user = new Users(req.body);
   user.generateToken();
   if (req.file){
@@ -75,11 +84,12 @@ router.delete('/remove/:id', (req, res)=> {
     })
   })
 });
-router.post('/sessions', async (req, res)=>{
+router.post('/login', async (req, res)=>{
+
   const user = await Users.findOne({username: req.body.username});
 
   if (!user) {
-    return res.status(400).send({error: "Username or Password is wrong"})
+    return res.status(404).send({error: "Username or Password is wrong"})
   }
 
   const isMatch = await user.checkPassword(req.body.password);
@@ -87,13 +97,16 @@ router.post('/sessions', async (req, res)=>{
     return res.status(400).send({error: "Username or Password is wrong"})
   }
 
-  user.generateToken();
-  await user.save();
-
-  res.send({token: user.token})
+  jwt.sign({user}, 'secretkey', async (err, token)=>{
+    await user.save();
+    res.json({
+      token,
+      firstName: user.firstName
+    })
+  });
 });
-router.delete('/sessions', async (req, res) => {
-  const token = req.get('Token');
+router.delete('/logout', async (req, res) => {
+  const token = req.get('Authorization');
   const success = {message: 'Logged out'};
 
   if (!token) {
