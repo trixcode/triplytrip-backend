@@ -5,6 +5,7 @@ const endpoints = require('./endpoints');
 const swaggerDoc = require('./swaggerDoc');
 const { mongoOptions, dbURL } = require('./config');
 const users = require('./app/users');
+const roleUsers = require('./app/roleUsers');
 
 const app = express();
 const port = 8000;
@@ -16,6 +17,7 @@ app.use(express.static('public'));
 mongoose.connect(dbURL, mongoOptions).then(()=>{
   console.log('MongoDB started!');
   app.use('/users', users);
+  app.use('/role_users', roleUsers);
 
   endpoints(app);
   swaggerDoc(app);

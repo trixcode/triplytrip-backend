@@ -3,7 +3,8 @@ const multer = require('multer');
 const nanoid = require('nanoid');
 const Users = require('../../models/Users');
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../../middleware/verifyToken/index');
+const verifyToken = require('../../middleware/verifyToken');
+const permit = require('../../middleware/permit');
 
 
 const storage = multer.diskStorage({
@@ -18,7 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 const router = express.Router();
 
-router.get('/', verifyToken, (req, res) => {
+router.get('/', [verifyToken],  (req, res) => {
   jwt.verify(req.token, 'secretkey', (err, authData) => {
     if (err) {
       res.sendStatus(403);

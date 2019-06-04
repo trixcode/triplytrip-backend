@@ -52,10 +52,9 @@ const UsersSchema = new Schema({
   },
   avatar: String,
   roles: {
-    type: String,
-    required: true,
-    default: "user",
-    enum: ["user", "admin"]
+    type: Schema.Types.ObjectId,
+    ref: 'RoleUsers',
+    required: true
   },
   createData: {
     type: String,
