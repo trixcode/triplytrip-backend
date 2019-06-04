@@ -26,6 +26,6 @@ ___
 
 - Если вы сделали все выше перечисленое то попробуйте запустить проект `npm run dev`
 & `yarn run dev`
-- Для тестирования использовать `npm test` & 'yarn test'
+- Для тестирования использовать `npm test` & `yarn test`
 - Для building `npm build` & `yarn build`
 
