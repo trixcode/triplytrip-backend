@@ -15,6 +15,6 @@ const RoleSchema = new Schema({
   updatedDate: String
 });
 
-const RoleUsers = mongoose.model('RoleUser', RoleSchema);
+const RoleUsers = mongoose.model('RoleUsers', RoleSchema);
 
 module.exports = RoleUsers;

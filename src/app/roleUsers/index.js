@@ -16,17 +16,13 @@ router.get('/:id', (req, res)=>{
     .then(result => res.send(result))
     .catch(()=> res.sendStatus(404))
 });
-router.post('/', [verifyToken, permit("admin")], (req, res)=> {
-  jwt.verify(req.token, 'secretkey', (err, authData) => {
-    if (err) {
-      res.sendStatus(403);
-    } else {
-      res.json({
-        message: 'Post Data',
-        authData
-      });
-    }
-  })
+router.post('/', (req, res)=> {
+  if (req.body.user && req.body.user.roles === "admin"){
+    const role = new RoleUsers(req.body);
+    role.save()
+      .then(result => res.send(result))
+  }
+
 });
 router.delete('/:id', (req, res)=>{
   Users.findById(req.params.id, (err, user)=>{
