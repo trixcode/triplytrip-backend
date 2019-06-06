@@ -9,5 +9,6 @@ module.exports = {
   mongoOptions: {
     useNewUrlParser: true,
     useCreateIndex: true
-  }
+  },
+  secret: 'supersecret'
 };

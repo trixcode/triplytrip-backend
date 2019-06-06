@@ -4,7 +4,6 @@ const nanoid = require('nanoid');
 const Users = require('../../models/Users');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../../middleware/verifyToken');
-const permit = require('../../middleware/permit');
 
 
 const storage = multer.diskStorage({
@@ -19,33 +18,19 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 const router = express.Router();
 
-router.get('/', [verifyToken],  (req, res) => {
-  jwt.verify(req.token, 'secretkey', (err, authData) => {
-    if (err) {
-      res.sendStatus(403);
-    } else {
-      res.json({
-        message: 'Get Users',
-        authData
-      });
-    }
-  })
-})
-
-
-router.post('/register', async (req, res) => {
-  const user = new Users(req.body);
-  user.generateToken();
-  if (req.file){
-    user.avatar = req.file.filename;
+router.get('/', verifyToken, (req, res) => {
+  if (req.user.roles.name === 'admin') {
+    Users.find()
+      .then(result => res.json({ result }))
+  } else {
+    Users.findById(req.user._id)
+      .then(result => res.json({ result }))
   }
-  try {
-    await user.save();
-    return res.send({_id: user._id, username: user.username});
-  } catch (e) {
-    return res.status(400).send(e)
-  }
+
 });
+
+
+
 
 router.get('/:id', (req, res) => {
   Users.findById(req.params.id)
@@ -78,53 +63,19 @@ router.put('/:id', (req, res) => {
   })
 });
 
-router.delete('/remove/:id', (req, res)=> {
-  Users.findById(req.params.id, (err, user)=>{
-    user.remove((userErr, removeUser)=>{
-      res.send('Delete user');
+router.delete('/remove/:id', verifyToken, (req, res)=> {
+  if (req.user.roles.name === 'admin'){
+    Users.findById(req.params.id, (err, user)=>{
+      user.remove((userErr, removeUser)=>{
+        res.send('Delete user');
+      })
     })
-  })
+  } else {
+    res.sendStatus(403)
+  }
+
 });
-router.post('/login', async (req, res)=>{
-
-  const user = await Users.findOne({username: req.body.username});
-
-  if (!user) {
-    return res.status(404).send({error: "Username or Password is wrong"})
-  }
-
-  const isMatch = await user.checkPassword(req.body.password);
-  if (!isMatch){
-    return res.status(400).send({error: "Username or Password is wrong"})
-  }
-
-  jwt.sign({user}, 'secretkey', async (err, token)=>{
-    await user.save();
-    res.json({
-      token,
-      firstName: user.firstName
-    })
-  });
-});
-router.delete('/logout', async (req, res) => {
-  const token = req.get('Authorization');
-  const success = {message: 'Logged out'};
-
-  if (!token) {
-    return res.send(success);
-  }
-
-  const user = await Users.findOne({token});
-
-  if (!user) {
-    return res.send(success);
-  }
-
-  user.generateToken();
-  await  user.save();
-
-  return res.send(success);
-});
+// ------------
 
 
 
