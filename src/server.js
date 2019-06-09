@@ -4,9 +4,13 @@ const mongoose = require('mongoose');
 const endpoints = require('./endpoints');
 const swaggerDoc = require('./swaggerDoc');
 const { mongoOptions, dbURL } = require('./config');
+
+
 const users = require('./app/users');
 const roleUsers = require('./app/roleUsers');
 const authorization = require('./app/authorization');
+const CategoryPlace = require('./app/categoryPlace');
+
 
 const app = express();
 const port = 8000;
@@ -20,6 +24,7 @@ mongoose.connect(dbURL, mongoOptions).then(()=>{
   app.use('/users', users);
   app.use('/role_users', roleUsers);
   app.use('/auth', authorization);
+  app.use('/category_place', CategoryPlace);
 
   endpoints(app);
   swaggerDoc(app);
