@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CitiesSchema = new Schema({
-  CountryId: {
+  countryId: {
     type: Schema.Types.ObjectId,
     ref: 'Country',
     required: true

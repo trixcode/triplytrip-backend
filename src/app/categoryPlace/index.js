@@ -43,7 +43,7 @@ router.put('/:id', verifyToken, (req, res)=> {
 });
 router.delete('/:id', verifyToken, (req, res)=>{
   if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator' && req.user._id === req.body.user){
-    Users.findById(req.params.id, (err, user)=>{
+    Category.findById(req.params.id, (err, user)=>{
       user.remove((userErr, removeUser)=>{
         res.send('Delete Category Place');
       })

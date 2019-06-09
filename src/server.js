@@ -10,7 +10,8 @@ const users = require('./app/users');
 const country = require('./app/country');
 const roleUsers = require('./app/roleUsers');
 const authorization = require('./app/authorization');
-const CategoryPlace = require('./app/categoryPlace');
+const categoryPlace = require('./app/categoryPlace');
+const cities = require('./app/cities');
 
 
 const app = express();
@@ -24,9 +25,10 @@ mongoose.connect(dbURL, mongoOptions).then(()=>{
   console.log('MongoDB started!');
   app.use('/users', users);
   app.use('/country', country);
+  app.use('/cities', cities);
   app.use('/role_users', roleUsers);
   app.use('/auth', authorization);
-  app.use('/category_place', CategoryPlace);
+  app.use('/category_place', categoryPlace);
 
   endpoints(app);
   swaggerDoc(app);

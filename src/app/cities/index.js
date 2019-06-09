@@ -1,13 +1,13 @@
 const express = require('express');
+const Cities = require('../../models/Cities');
 const verifyToken = require('../../middleware/verifyToken');
-const Country = require('../../models/Country');
-
 
 const router = express.Router();
 
+
 router.get('/', verifyToken, (req, res) => {
   if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator'){
-    Country.find()
+    Cities.find()
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
   } else {
@@ -16,8 +16,8 @@ router.get('/', verifyToken, (req, res) => {
 });
 router.post('/', verifyToken, (req, res) => {
   if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator'){
-    const country = new Country(req.body);
-    country.save()
+    const cities = new Cities(req.body);
+    cities.save()
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
   } else {
@@ -26,13 +26,12 @@ router.post('/', verifyToken, (req, res) => {
 });
 router.delete('/:id', verifyToken, (req, res) => {
   if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator'){
-    Country.findById(req.params.id, (err, user)=>{
+    Cities.findById(req.params.id, (err, user)=>{
       user.remove((userErr, removeUser)=>{
         res.send('Delete category');
       })
     })
   }
-})
-
+});
 
 module.exports = router;
