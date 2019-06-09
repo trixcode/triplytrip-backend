@@ -39,7 +39,7 @@ router.delete('/:id', verifyToken, (req, res)=>{
   if (req.user.roles.name === "admin"){
     Users.findById(req.params.id, (err, user)=>{
       user.remove((userErr, removeUser)=>{
-        res.send('Delete user');
+        res.send('Delete Role');
       })
     })
   }else {

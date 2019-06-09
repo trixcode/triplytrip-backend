@@ -12,10 +12,7 @@ const CitiesSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String,
-    required: true
-  }
+  description: String
 });
 
 const CitiesModels = mongoose.model('Cities', CitiesSchema);

@@ -7,6 +7,7 @@ const { mongoOptions, dbURL } = require('./config');
 
 
 const users = require('./app/users');
+const country = require('./app/country');
 const roleUsers = require('./app/roleUsers');
 const authorization = require('./app/authorization');
 const CategoryPlace = require('./app/categoryPlace');
@@ -22,6 +23,7 @@ app.use(express.static('public'));
 mongoose.connect(dbURL, mongoOptions).then(()=>{
   console.log('MongoDB started!');
   app.use('/users', users);
+  app.use('/country', country);
   app.use('/role_users', roleUsers);
   app.use('/auth', authorization);
   app.use('/category_place', CategoryPlace);
