@@ -12,6 +12,7 @@ const roleUsers = require('./app/roleUsers');
 const authorization = require('./app/authorization');
 const categoryPlace = require('./app/categoryPlace');
 const cities = require('./app/cities');
+const Place = require('./app/place');
 
 
 const app = express();
@@ -29,6 +30,7 @@ mongoose.connect(dbURL, mongoOptions).then(()=>{
   app.use('/role_users', roleUsers);
   app.use('/auth', authorization);
   app.use('/category_place', categoryPlace);
+  app.use('/place', Place);
 
   endpoints(app);
   swaggerDoc(app);

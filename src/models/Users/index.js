@@ -54,7 +54,8 @@ const UsersSchema = new Schema({
   roles: {
     type: Schema.Types.ObjectId,
     ref: 'RoleUsers',
-    required: true
+    required: true,
+    default: '5cf62f4ff422b512a02455a2'
   },
   createData: {
     type: String,

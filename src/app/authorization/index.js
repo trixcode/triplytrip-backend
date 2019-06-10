@@ -1,13 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const muler = require('multer');
+const multer = require('multer');
 const nanoid = require('nanoid');
+const config = require('../../config');
+const path = require('path');
 const jwt = require('jsonwebtoken');
 
 const Users = require('../../models/Users');
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb)=>{
+    cb(null, config.uploadPath);
+  },
+  filename: (req, file, cb) =>{
+    cb(null, nanoid() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({storage});
+
 
 router.post('/login', async (req, res)=>{
+  
+
 
   const user = await Users.findOne({username: req.body.username});
 
@@ -19,6 +34,7 @@ router.post('/login', async (req, res)=>{
   if (!isMatch){
     return res.status(400).send({error: "Username or Password is wrong"})
   }
+
 
   jwt.sign({user}, 'secretkey', async (err, token)=>{
     req.user = user;
@@ -49,10 +65,10 @@ router.delete('/logout', async (req, res) => {
 
   return res.send(success);
 });
-router.post('/register', async (req, res) => {
+router.post('/register', upload.single('avatar'), async (req, res) => {
   const user = new Users(req.body);
   user.generateToken();
-  if (req.file){
+  if (req.file) {
     user.avatar = req.file.filename;
   }
   try {
