@@ -21,8 +21,6 @@ const upload = multer({storage});
 
 
 router.post('/login', async (req, res)=>{
-  
-
 
   const user = await Users.findOne({username: req.body.username});
 
@@ -32,7 +30,7 @@ router.post('/login', async (req, res)=>{
 
   const isMatch = await user.checkPassword(req.body.password);
   if (!isMatch){
-    return res.status(400).send({error: "Username or Password is wrong"})
+    return res.status(404).send({error: "Username or Password is wrong"})
   }
 
 
@@ -41,8 +39,6 @@ router.post('/login', async (req, res)=>{
     await user.save();
     res.json({
       token: token,
-      user: jwt.sign({id: req.user}, 'secret'),
-      firstName: user.firstName
     })
   });
 });

@@ -7,14 +7,8 @@ const SALT_WORK_FACTOR = 10;
 const Schema = mongoose.Schema;
 
 const UsersSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true
-  },
-  lastName: {
-    type: String,
-    required: true
-  },
+  firstName: String,
+  lastName: String,
   username: {
     type: String,
     required: true,
@@ -42,14 +36,8 @@ const UsersSchema = new Schema({
     type: String,
     required: true
   },
-  phone: {
-    type: String,
-    required: true
-  },
-  dateOfBirth: {
-    type: String,
-    required: true
-  },
+  phone: String,
+  dateOfBirth: String,
   avatar: String,
   roles: {
     type: Schema.Types.ObjectId,
@@ -81,7 +69,7 @@ UsersSchema.pre('save', async function (next) {
 });
 UsersSchema.set('toJSON', {
   transform: (doc, ret, options) => {
-    // delete ret.password;
+    delete ret.password;
     return ret;
   }
 });
