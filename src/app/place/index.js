@@ -57,7 +57,6 @@ router.post('/', [verifyToken, upload.single('mainImage', 'images')], (req,res)=
   }
   if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator') {
     place.isActive = true;
-    console.log(place);
     place.save()
       .then(result => res.send(result))
       .catch(() => res.sendStatus(400))
@@ -73,6 +72,13 @@ router.patch('/:id', verifyToken, (req, res)=>{
       place.set({...req.body, updateDate: new Date(), isModerated: true});
       place.save((saveErr, updated)=>{
         res.send({updated})
+      })
+    })
+  } else if (req.user.roles === 'user'){
+    Place.find(req.params.id, (err, place) => {
+      place.set({...req.body, updateDate: new Date(), isModerated: true});
+      place.save((saveErr, updated) => {
+        res.send(updated)
       })
     })
   }
@@ -104,15 +110,12 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', verifyToken, (req, res) => {
   if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator'){
     Place.findById(req.params.id, (err, place)=>{
-      place.remove((userErr, removePlace)=>{
+      place.remove(()=>{
         res.send('Delete Place');
       })
     })
   }
-})
-
-
-
+});
 
 
 module.exports = router;
