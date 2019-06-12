@@ -23,48 +23,32 @@ const PlaceSchema = new Schema({
   },
   country: {
     type: Schema.Types.ObjectId,
-    ref: 'Country',
-    required: true
+    ref: 'Country'
   },
   cities: {
     type: Schema.Types.ObjectId,
-    ref: 'Cities',
-    required: true
+    ref: 'Cities'
   },
   location: [{
     latitude: {
-      type: String,
-      required: true
+      type: String
     },
     longitude: {
-      type: String,
-      required: true
+      type: String
     }
   }],
   mainImage: {
     type: String
   },
-  images: [{
-    image: String
-  }],
   email: {
     type: String,
     required: true
   },
-  phone: {
-    type: String,
-    required: true
-  },
+  phone: String,
   description: String,
   extraDescription: String,
-  price: {
-    type: Number,
-    required: true
-  },
-  rating: {
-    type: Number,
-    required: true
-  },
+  price: Number,
+  rating: Number,
   isActive: {
     type: Boolean,
     required: true,

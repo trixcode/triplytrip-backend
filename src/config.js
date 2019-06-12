@@ -5,7 +5,7 @@ const rootPath = __dirname;
 module.exports = {
   rootPath,
   uploadPath: path.join(rootPath, 'public/uploads'),
-  dbURL: 'mongodb://mongo:27017/tripletrip',
+  dbURL: 'mongodb://localhost/tripletrip',
   mongoOptions: {
     useNewUrlParser: true,
     useCreateIndex: true

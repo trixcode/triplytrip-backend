@@ -22,8 +22,8 @@ const index = (req, res, next) => {
               res.sendStatus(403)
             } else {
 
-                req.user = obj;
-                next()
+              req.user = obj;
+              next()
             }
           });
       }
