@@ -20,14 +20,14 @@ const router = express.Router();
 
 //get places
 router.get('/', (req, res)=> {
-
-    Place.find({isActive: true})
-      .populate('user')
-      .populate('category')
-      .populate('country')
-      .populate('cities')
-      .sort('-createDate')
-      .then(result => res.send(result))
+  Place.find({isActive: true})
+    .populate('user')
+    .populate('category')
+    .populate('country')
+    .populate('cities')
+    .sort('-createDate')
+    .then(result => res.send(result))
+    .catch(() => res.sendStatus(404))
 });
 
 //post place
@@ -58,13 +58,15 @@ router.patch('/:id', verifyToken, (req, res)=>{
         res.send({updated})
       })
     })
-  } else if (req.user.roles.name === 'user'){
+  } else if (req.user._id.equals(req.params.id)){
     Place.find(req.params.id, (err, place) => {
       place.set({...req.body, updateDate: new Date(), isModerated: true});
       place.save((saveErr, updated) => {
         res.send(updated)
       })
     })
+  } else {
+    res.sendStatus(400)
   }
 
 });

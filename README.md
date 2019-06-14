@@ -1,4 +1,4 @@
-**TriplyTrip project**
+**TriplyTrip project API**
 
 __________
 
@@ -23,7 +23,10 @@ ___
 ___
 Выполните команду `npm install` или если у вас установлен yarn
 `yarn install`.
-
+---
+- Надо запустить fixture.js `node fixture.js`.
+Что бы загрузить дефолдных юзеров 
+---
 - Если вы сделали все выше перечисленое то попробуйте запустить проект `npm run dev`
 & `yarn run dev`
 - Для тестирования использовать `npm test` & `yarn test`

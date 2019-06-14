@@ -5,14 +5,10 @@ const verifyToken = require('../../middleware/verifyToken');
 
 const router = express.Router();
 
-router.get('/', verifyToken, (req, res)=>{
-  if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator'){
-    Category.find()
-      .then(result => res.send(result))
-      .catch(() => res.sendStatus(404))
-  } else {
-    res.sendStatus(403)
-  }
+router.get('/', (req, res)=> {
+  Category.find()
+    .then(result => res.send(result))
+    .catch(() => res.sendStatus(404));
 });
 
 router.post('/', verifyToken, (req, res)=>{
