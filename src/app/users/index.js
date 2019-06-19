@@ -21,10 +21,10 @@ const router = express.Router();
 router.get('/', verifyToken, (req, res) => {
   if (req.user.roles.name === 'admin') {
     Users.find()
-      .then(result => res.json({ result }))
+      .then(results => res.json({ results }))
   } else {
     Users.findById(req.user._id)
-      .then(result => res.json({ result }))
+      .then(results => res.json({ results }))
   }
 
 });
