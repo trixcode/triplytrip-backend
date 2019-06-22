@@ -35,6 +35,18 @@ router.get('/', function (req, res) {
     .catch(() => res.sendStatus(404))
 });
 
+// get places by id
+router.get('/:id', function (req, res) {
+  Place.findById(req.params.id)
+  .then(PlaceFound => {
+    if(!PlaceFound){
+      return res.status(404).end(); 
+    }
+    return res.status(200).json(PlaceFound);
+  })
+  .catch(err => next(err))
+});
+
 //post place
 router.post('/', [verifyToken, upload.single('mainImage', 'images')], (req, res) => {
   const place = new Place(req.body);
