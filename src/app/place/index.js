@@ -39,7 +39,7 @@ router.get('/:id', function (req, res) {
     }
     return res.status(200).json(PlaceFound);
   })
-  .catch(err => next(err))
+  .catch(err => console.log(err))
 });
 
 //post place
