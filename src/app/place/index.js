@@ -19,17 +19,21 @@ const upload = multer({storage});
 const router = express.Router();
 
 //get places
-router.get('/', (req, res)=> {
-  Place.find({isActive: true})
-    .populate('user')
-    .populate('category')
-    .populate('country')
-    .populate('cities')
-    .sort('-createDate')
+router.get('/', function (req, res) {	
+  var page = req.query.skip || 0;	
+  var limit = req.query.limit || 50;	
+  Place.find({ isActive: true })	
+    .populate('user')	
+    .populate('category')	    
+    .populate('country')	   
+    .populate('cities')	    
+    .sort('-createDate')	    
+    .lean()	
+    .skip(Number(page))	
+    .limit(Number(limit))	
     .then(result => res.send(result))
     .catch(() => res.sendStatus(404))
 });
-
 // get places by id
 router.get('/:id', function (req, res) {
   Place.findById(req.params.id)
@@ -142,7 +146,7 @@ router.delete('/:id', verifyToken, (req, res) => {
       place.remove(()=>{
         res.send('Delete Place');
       })
-    })
+    })    
   } else if (req.user.roles.name === 'user') {
     Place.findById(req.params.id, (err, place)=>{
       if (req.user._id.equals(place.user)){
