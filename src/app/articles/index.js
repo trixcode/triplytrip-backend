@@ -20,6 +20,7 @@ const router = express.Router();
 
 //get Articless
 router.get('/', function (req, res) {	
+  var page = req.query.skip || 0;	
   var limit = req.query.limit || 50;	
   Articles.find({ isActive: true })	
     .populate('user')	
@@ -28,6 +29,7 @@ router.get('/', function (req, res) {
     .populate('cities')	    
     .sort('-createDate')	    
     .lean()	
+    .skip(Number(page))	
     .limit(Number(limit))	
     .then(result => res.send(result))
     .catch(() => res.sendStatus(404))
