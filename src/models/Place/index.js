@@ -26,11 +26,13 @@ const PlaceSchema = new Schema({
   },
   country: {
     type: Schema.Types.ObjectId,
-    ref: 'Country'
+    ref: 'Country',
+    text: true
   },
   cities: {
     type: Schema.Types.ObjectId,
-    ref: 'Cities'
+    ref: 'Cities',
+    text: true,
   },
   location: [{
     latitude: {
@@ -62,8 +64,14 @@ const PlaceSchema = new Schema({
     type: String,
     text: true,
   },
-  price: Number,
-  rating: Number,
+  price: {
+    type: Number,
+    text: true,
+  },
+  rating: {
+    type: Number,
+    text: true,
+  },
   isActive: {
     type: Boolean,
     required: true,
