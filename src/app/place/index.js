@@ -23,6 +23,8 @@ router.get('/', function (req, res) {
   var page = req.query.skip || 0;	
   var limit = req.query.limit || 50;
   const search = req.query.search;
+  const category = req.query.category
+  const cities = req.query.cities
   if (search) {
     Place.find(
       { $text: { $search: search } },
@@ -35,8 +37,28 @@ router.get('/', function (req, res) {
       .sort('-createDate')
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
-  }	else {
-    Place.find({ isActive: true })
+  }	if (category) {
+    Place.find(
+      {category: category, isActive: true})
+      .populate('user')	
+      .populate('category')	    
+      .populate('country')	   
+      .populate('cities')	    
+      .sort('-createDate')
+      .then(result => res.send(result))
+      .catch(() => res.sendStatus(404))
+  } if (cities) {
+    Place.find(
+      {cities: cities, isActive: true})
+      .populate('user')	
+      .populate('category')	    
+      .populate('country')	   
+      .populate('cities')	    
+      .sort('-createDate')
+      .then(result => res.send(result))
+      .catch(() => res.sendStatus(404))
+  } else {
+    Place.find({ isActive: true})
       .populate('user')	
       .populate('category')	    
       .populate('country')	   
