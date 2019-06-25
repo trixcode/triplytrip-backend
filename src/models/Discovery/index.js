@@ -8,18 +8,10 @@ const DiscoverySchema = new Schema({
     ref: 'Users',
     required: true
   },
-  title: {
-    type: String,
-    required: true
-  },
-
   mainImage: {
     type: String
   },
   
-  description: String,
-  extraDescription: String,
-
   isActive: {
     type: Boolean,
     required: true,
@@ -37,7 +29,13 @@ const DiscoverySchema = new Schema({
     required: true
   },
 
-  updateDate: String
+  updateDate: String,
+  countDestinations: Number,
+  cities: {
+    type: Schema.Types.ObjectId,
+    ref: 'Cities',
+    required: true
+  },
 });
 
 const DiscoveryModel = mongoose.model('Discovery', DiscoverySchema);

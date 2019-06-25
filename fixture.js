@@ -107,6 +107,8 @@ const run = async () => {
     }
   );
 
+
+
   const categoryPlace = await CategoryPlace.create(
     {
       user: users[0].id,
@@ -168,7 +170,7 @@ const run = async () => {
       address: "Улица Тоголок Молдо 52, Бишкек",
       email: "reception@plazahotel.kg",
       isActive: true,
-      mainImage: "https://t-ec.bstatic.com/images/hotel/max1024x768/430/43006880.jpg",  
+      mainImage: "https://t-ec.bstatic.com/images/hotel/max1024x768/430/43006880.jpg",
       phone: "996312537777",
       price: 19545,
       rating: 4,
@@ -182,7 +184,7 @@ const run = async () => {
       address: "Улица Медерова 115, Бишкек",
       email: "hotelgardenkg@gmail.com",
       isActive: true,
-      mainImage: "https://t-ec.bstatic.com/images/hotel/max1024x768/112/112045315.jpg",  
+      mainImage: "https://t-ec.bstatic.com/images/hotel/max1024x768/112/112045315.jpg",
       phone: "996312545425",
       price: 3900,
       rating: 4,
@@ -196,7 +198,7 @@ const run = async () => {
       address: "Оренбургский переулок , 31 , Бишкек",
       email: "reception@discoveryhotel.kg",
       isActive: true,
-      mainImage: "https://t-ec.bstatic.com/images/hotel/max1024x768/741/74166393.jpg",       
+      mainImage: "https://t-ec.bstatic.com/images/hotel/max1024x768/741/74166393.jpg",
       phone: "996312563333",
       price: 11500,
       rating: 4,
@@ -208,7 +210,7 @@ const run = async () => {
       user: users[0].id,
       name: "Obama Bar & Grill",
       address: "ул. Токтогула, 93, уг. ул. Тыныстанова",
-      email: "info@obama.kg"  ,
+      email: "info@obama.kg",
       isActive: true,
       mainImage: "https://strg1.restoran.kg/neofiles/serve-image/57c6ad78b7f1d90f5600094f/1170x468/c1/q70",
       phone: "996312664753",
@@ -222,7 +224,7 @@ const run = async () => {
       user: users[0].id,
       name: "Барашек",
       address: "ул. Токомбаева, 78, уг. ул. Куттубаева",
-      email: "https://www.instagram.com/barashek.kg/"  ,
+      email: "https://www.instagram.com/barashek.kg/",
       isActive: true,
       mainImage: "http://smak.kg/wp-content/gallery/barashek/IMG-20181003-WA0011.jpg",
       phone: "996312521111",
@@ -238,7 +240,7 @@ const run = async () => {
       address: "Тыныстанова 157, Жибек-Жолу 555, Медерова 159",
       email: "faiza.kg",
       isActive: true,
-      mainImage: "https://2gis.kg/bishkek/firm/70000001019339201/gallery/firm/70000001019339201/photos/firm/70000001019339201-15762598728717388",       
+      mainImage: "https://2gis.kg/bishkek/firm/70000001019339201/gallery/firm/70000001019339201/photos/firm/70000001019339201-15762598728717388",
       phone: "996555324922",
       price: 100,
       rating: 4,
@@ -260,11 +262,11 @@ const run = async () => {
                     Основная концепция заведения – это восточная и европейская кухня в сочетании с уютной, теплой обстановкой и хорошим обслуживанием. Радушие и доброжелательность к гостям, 
                     уважение к традициям и следование классической рецептуре – вот что стало визитной карточкой кафе «Фаиза».
                     Интерьер «Фаиза» оформлен в восточном стиле. Теплые оттенки настраивают на дружелюбный тон. Залы украшены элементами быта среднеазиатских народов. Декоративные потолки с узорами ручной работы.</p>`,
-      
+
       extraDescription: `<p>На протяжении многих лет мы создаем для наших клиентов атмосферу уюта и отдыха. Каждый день нас посещает огромное количество людей всех возрастов, 
                             начиная от студентов и заканчивая деловыми людьми. Всех их объединяет одно -  любовь к восточной кухне. 
                             "Фаиза" - сеть кафе, заслужившая известность далеко за пределами страны, благодаря превосходной кухне, первоклассному обслуживанию и вниманию к каждому гостю.</p>`,
-    },                     
+    },
     {
       category: categoryPlace[4].id,
       user: users[0].id,
@@ -323,7 +325,7 @@ const run = async () => {
       address: "Chingiz Aytmatova 93/1, Бишкек",
       email: "RESERVATION@AK-SAI.COM",
       isActive: true,
-      mainImage: "https://images.trvl-media.com/hotels/28000000/27810000/27808500/27808448/757fc231_z.jpg",       
+      mainImage: "https://images.trvl-media.com/hotels/28000000/27810000/27808500/27808448/757fc231_z.jpg",
       phone: "996312540143",
       price: 50,
       rating: 4,
@@ -339,7 +341,7 @@ const run = async () => {
       address: "Шабдан Баатыра,1 Д/1, Бишкек",
       email: "https://mansion.restoran.kg",
       isActive: true,
-      mainImage: "https://www.instagram.com/p/BhgTYaeBGqb/",       
+      mainImage: "https://www.instagram.com/p/BhgTYaeBGqb/",
       phone: "996555130003",
       price: 20,
       rating: 4,
@@ -347,13 +349,13 @@ const run = async () => {
       extraDescription: "",
     },
     {
-    category: categoryPlace[0].id,
+      category: categoryPlace[0].id,
       user: users[0].id,
       name: "Karagat Hotel",
       address: "ул.Абдрахманова 89A, Каракол",
       email: "http://karagat-hotel.com",
       isActive: true,
-      mainImage: "http://media.mice.kg/CACHE/images/hotel/2/203/2139573b-705e-434d-bb4c-43a33efbe3b5/da3e2d69c0839e707a1375eed14e60c5.jpg",       
+      mainImage: "http://media.mice.kg/CACHE/images/hotel/2/203/2139573b-705e-434d-bb4c-43a33efbe3b5/da3e2d69c0839e707a1375eed14e60c5.jpg",
       phone: "966556399939",
       price: 45,
       rating: 4,
@@ -363,28 +365,28 @@ const run = async () => {
       extraDescription: `<p>Высококвалифицированные, предупредительные и доброжелательные сотрудники отеля всегда к Вашим услугам и рады обеспечить Вам комфорт и удобство на все время Вашего пребывания в нашем Отеле.</p>`,
     },
     {
-    category: categoryPlace[0].id,
+      category: categoryPlace[0].id,
       user: users[0].id,
       name: "КАПРИЗ-КАРАКОЛ",
       address: "Горнолыжная база Каракол, Каракол",
       email: "hotel.kapriz@gmail.com",
       isActive: true,
-      mainImage: "https://bstatic.com/images/hotel/org/164/164132407.jpg",       
+      mainImage: "https://bstatic.com/images/hotel/org/164/164132407.jpg",
       phone: "996312905170",
       price: 157,
       rating: 4,
       description: `<p>Отель Каприз Каракол - это горнолыжный отель, расположенный на территории горнолыжной базы "Каракол", в 7 км от г. Каракол (Кыргызстан, Ысыккульская область). 
                       Отель включает в себя 48 номеров категории - Twin Room (2 персоны), и 4 номера категории Suite Room (4 персоны). Отель Каприз Каракол - это круглогодичный гостиничный комплекс.</p>`,
       extraDescription: `<p>Отель Каприз-Каракол – это горнолыжный отель расположенный на территории горнолыжной базы Каракол в 7 км от г. Каракол. Отель работает круглый год.</p>`,
-      },
-      {
-     category: categoryPlace[0].id,
+    },
+    {
+      category: categoryPlace[0].id,
       user: users[0].id,
       name: "Marco Polo",
       address: "Иссык-Кульская область, с. Боз-Бешик",
       email: "dostur@mail.kg",
       isActive: true,
-      mainImage: "https://www.issykkul.biz/katalog/pansionatyy/marko-polo.aspx#group402-1",       
+      mainImage: "https://www.issykkul.biz/katalog/pansionatyy/marko-polo.aspx#group402-1",
       phone: "996701751595",
       price: 18,
       rating: 4,
@@ -392,8 +394,8 @@ const run = async () => {
                       дополнит картину полного счастья и принесет не меньше радости, чем озерная вода! На пляже широкий выбор водных развлечений для отдыхающих разного возраста – катамараны, 
                       водные мотоциклы, лодки, бананы, серф-доски, каноэ, водные лыжи.</p>`,
       extraDescription: `<p>Отель располагает номерами класса «Эконом», «Стандарт», «Люкс», расположенными в трехэтажных корпусах, и VIP коттеджами в береговой линии. Уютные номера оснащены всем необходимым для комфортного проживания отдыхающих, а забота обслуживающего персонала с первой минуты настроит Вас на приятный отдых.</p>`,
-      },
-      {
+    },
+    {
       category: categoryPlace[5].id,
       user: users[0].id,
       name: "Central Hostel Bishkek",
@@ -555,6 +557,7 @@ const run = async () => {
       extraDescription: `<p>Годовое количество осадков колеблется от 180 мм на востоке страны до 600 мм в юго-западных регионах. Максимальное количество осадков выпадает в начале лета и в осенне-зимний период. Причем к середине зимы толщина снежного покрова на западных склонах гор может доходить до 1 метра, а в высокогорьях снег лежит круглый год.</p>`
     },
   );
+
   const eventTypes = await EventTypes.create(
     {
       user: users[0].id,
@@ -573,27 +576,81 @@ const run = async () => {
       name: "For children"
     }
   );
-    
+
   const events = await Events.create(
     {
       eventTypes: eventTypes[0].id,
       user: users[0].id,
-      title: "Иссык-Куль",
+      title: "Halloween party",
       isActive: true,
-      mainImage: "https://sputnik.kg/images/102705/44/1027054476.jpg",
-      description: `<p>Самое большое озеро в Киргизии, бессточное, входит в 30 крупнейших по площади озёр мира и на седьмом месте в списке самых глубоких озёр. Расположено в северо-восточной части республики, между хребтами Северного Тянь-Шаня: Кюнгёй-Ала-Тоо и Терскей Ала-Тоо на высоте 1609 м над уровнем моря. Озеро бессточное, в него впадает до 80 сравнительно небольших притоков.</p>`,
-      extraDescription: `<p>Редкое сочетание морского и горного климатов привлекает многочисленных отдыхающих и туристов. Озеро Иссык-Куль является главным источником доходов от туризма в Киргизии. Тем не менее на побережье озера Иссык-Куль до сих пор немало неосвоенных мест, на месте которых постепенно появляются новые комфортабельные места отдыха.</p>`
+      mainImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFySmxubzZCjRIwx2NBXE0knTjkrf9Ipu5MUv-dhW-PSp-M-9p",
+      rating: 4,
+      address: "Московская, 154",
+      isOpen: true,
+      price: 1000,
     },
+    {
+      eventTypes: eventTypes[0].id,
+      user: users[0].id,
+      title: "Global Party",
+      isActive: true,
+      mainImage: "https://s3-media2.fl.yelpcdn.com/bphoto/slMG7okiHi3GCGLqRADhEw/o.jpg",
+      rating: 5,
+      address: "Льва Толстого 36к/1",
+      isOpen: true,
+      price: 1200,
+    }
   );
 
   const discovery = await Discovery.create(
     {
       user: users[0].id,
-      title: "Иссык-Кульs",
+      cities: cities[0].id,
+      isActive: true,
+      mainImage: "https://i.pinimg.com/originals/75/31/02/7531028e146617664ab68ff6427efa92.jpg",
+      countDestinations: 25,
+    },
+    {
+      user: users[0].id,
+      cities: cities[1].id,
+      isActive: true,
+      mainImage: "https://sputnik.kg/images/103508/59/1035085931.jpg",
+      countDestinations: 13,
+    },
+    {
+      user: users[0].id,
+      cities: cities[2].id,
+      isActive: true,
+      mainImage: "https://media-cdn.tripadvisor.com/media/photo-s/10/91/4c/9f/karakol-ski-base.jpg",
+      countDestinations: 15,
+    },
+    {
+      user: users[0].id,
+      cities: cities[3].id,
+      isActive: true,
+      mainImage: "https://too.kg/wp-content/uploads/sulaiman-too-6-1024x574.jpg",
+      countDestinations: 8,
+    },
+    {
+      user: users[0].id,
+      cities: cities[4].id,
       isActive: true,
       mainImage: "https://sputnik.kg/images/102705/44/1027054476.jpg",
-      description: `<p>Самое большое озеро в Киргизии, бессточное, входит в 30 крупнейших по площади озёр мира и на седьмом месте в списке самых глубоких озёр. Расположено в северо-восточной части республики, между хребтами Северного Тянь-Шаня: Кюнгёй-Ала-Тоо и Терскей Ала-Тоо на высоте 1609 м над уровнем моря. Озеро бессточное, в него впадает до 80 сравнительно небольших притоков.</p>`,
-      extraDescription: `<p>Редкое сочетание морского и горного климатов привлекает многочисленных отдыхающих и туристов. Озеро Иссык-Куль является главным источником доходов от туризма в Киргизии. Тем не менее на побережье озера Иссык-Куль до сих пор немало неосвоенных мест, на месте которых постепенно появляются новые комфортабельные места отдыха.</p>`
+      countDestinations: 9,
+    },
+    {
+      user: users[0].id,
+      cities: cities[5].id,
+      isActive: true,
+      mainImage: "https://sputnik.kg/images/102705/44/1027054476.jpg",
+      countDestinations: 5,
+    },
+    {
+      user: users[0].id,
+      cities: cities[6].id,
+      isActive: true,
+      mainImage: "https://sputnik.kg/images/102705/44/1027054476.jpg",
+      countDestinations: 8,
     },
   );
 

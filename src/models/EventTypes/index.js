@@ -20,6 +20,7 @@ const EventTypesSchema = new Schema({
   updatedDate: String,
   description: String,
 });
+
 const EventTypes = mongoose.model('EventTypes', EventTypesSchema);
 
 module.exports = EventTypes;
