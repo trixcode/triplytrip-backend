@@ -36,7 +36,7 @@ router.get('/', function (req, res) {
       .populate('cities')
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
-  } if (category) {
+  }else if (category) {
     Place.find(
       { category: category, isActive: true })
       .populate('user')
@@ -46,7 +46,7 @@ router.get('/', function (req, res) {
       .sort('-createDate')
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
-  } if (cities) {
+  }else if (cities) {
     Place.find(
       { cities: cities, isActive: true })
       .populate('user')
