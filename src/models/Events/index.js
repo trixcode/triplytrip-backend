@@ -5,9 +5,10 @@ const Schema = mongoose.Schema;
 const EventsSchema = new Schema({
   eventTypes: {
     type: Schema.Types.ObjectId,
-    ref: 'EventTypes',
+    ref: 'Users',
     required: true
   },
+
   user: {
     type: Schema.Types.ObjectId,
     ref: 'Users',
@@ -22,10 +23,6 @@ const EventsSchema = new Schema({
   mainImage: {
     type: String
   },
-  
-  description: String,
-  extraDescription: String,
-
   isActive: {
     type: Boolean,
     required: true,
@@ -43,6 +40,14 @@ const EventsSchema = new Schema({
     required: true
   },
   rating: Number,
+  address: String,
+  price: Number,
+  isOpen: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
 
   updateDate: String,
   
