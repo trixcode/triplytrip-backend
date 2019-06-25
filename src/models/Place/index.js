@@ -25,10 +25,12 @@ const PlaceSchema = new Schema({
   country: {
     type: Schema.Types.ObjectId,
     ref: 'Country',
+    text: true,
   },
   cities: {
     type: Schema.Types.ObjectId,
     ref: 'Cities',
+    text: true,
   },
   location: [{
     latitude: {

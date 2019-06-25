@@ -19,31 +19,53 @@ const upload = multer({ storage });
 const router = express.Router();
 
 // get places
-router.get('/', function (req, res) {	
-  var page = req.query.skip || 0;	
+router.get('/', function (req, res) {
+  var page = req.query.skip || 0;
   var limit = req.query.limit || 50;
+  const category = req.query.category
+  const cities = req.query.cities
   const search = req.query.search;
   if (search) {
     Place.find(
       { $text: { $search: search } },
-      { score: { $meta: "textScore" } })	
+      { score: { $meta: "textScore" } })
       .sort({ score: { $meta: 'textScore' } })
-      .populate('user')	
-      .populate('category')	    
-      .populate('country')	   
-      .populate('cities')	    
+      .populate('user')
+      .populate('category')
+      .populate('country')
+      .populate('cities')
+      .then(result => res.send(result))
+      .catch(() => res.sendStatus(404))
+  } if (category) {
+    Place.find(
+      { category: category, isActive: true })
+      .populate('user')
+      .populate('category')
+      .populate('country')
+      .populate('cities')
+      .sort('-createDate')
+      .then(result => res.send(result))
+      .catch(() => res.sendStatus(404))
+  } if (cities) {
+    Place.find(
+      { cities: cities, isActive: true })
+      .populate('user')
+      .populate('category')
+      .populate('country')
+      .populate('cities')
+      .sort('-createDate')
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
   } else {
-    Place.find({ isActive: true})
-      .populate('user')	
-      .populate('category')	    
-      .populate('country')	   
-      .populate('cities')	    
+    Place.find({ isActive: true })
+      .populate('user')
+      .populate('category')
+      .populate('country')
+      .populate('cities')
       .sort('-createDate')
       .lean()
-      .skip(Number(page))	
-      .limit(Number(limit))	
+      .skip(Number(page))
+      .limit(Number(limit))
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
   }
