@@ -7,7 +7,6 @@ const PlaceSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'CategoryPlace',
     required: true,
-    text: true
   },
   user: {
     type: Schema.Types.ObjectId,
@@ -21,27 +20,22 @@ const PlaceSchema = new Schema({
   },
   address: {
     type: String,
-    text: true,
     required: true
   },
   country: {
     type: Schema.Types.ObjectId,
     ref: 'Country',
-    text: true
   },
   cities: {
     type: Schema.Types.ObjectId,
     ref: 'Cities',
-    text: true,
   },
   location: [{
     latitude: {
       type: String,
-      text: true,
     },
     longitude: {
       type: String,
-      text: true,
     }
   }],
   mainImage: {
@@ -49,13 +43,9 @@ const PlaceSchema = new Schema({
   },
   email: {
     type: String,
-    text: true,
     required: true
   },
-  phone: {
-    type: String,
-    text: true,
-  },
+  phone: String,
   description: {
     type: String,
     text: true,
@@ -64,14 +54,8 @@ const PlaceSchema = new Schema({
     type: String,
     text: true,
   },
-  price: {
-    type: Number,
-    text: true,
-  },
-  rating: {
-    type: Number,
-    text: true,
-  },
+  price: Number,
+  rating: Number,
   isActive: {
     type: Boolean,
     required: true,
