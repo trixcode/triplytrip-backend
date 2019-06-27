@@ -68,8 +68,13 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
     user.avatar = req.file.filename;
   }
   try {
+   jwt.sign({user}, 'secretkey', async (err, token)=>{
+    req.user = user;
     await user.save();
-    return res.send({_id: user._id, username: user.username});
+    res.json({
+      token: token,
+    })
+  });
   } catch (e) {
     return res.status(400).send(e)
   }
