@@ -13,6 +13,14 @@ const authorization = require('./app/authorization');
 const categoryPlace = require('./app/categoryPlace');
 const cities = require('./app/cities');
 const Place = require('./app/place');
+const Articles = require('./app/articles');
+const Events = require('./app/events');
+const EventTypes = require('./app/eventTypes');
+const Discovery = require('./app/discovery');
+
+
+
+
 
 
 const app = express();
@@ -31,6 +39,15 @@ mongoose.connect(dbURL, mongoOptions).then(()=>{
   app.use('/auth', authorization);
   app.use('/category_place', categoryPlace);
   app.use('/place', Place);
+  app.use('/articles', Articles);
+  app.use('/events', Events);
+  app.use('/eventTypes', EventTypes);
+  app.use('/discovery', Discovery);
+
+  
+
+
+
 
   endpoints(app);
   swaggerDoc(app);

@@ -6,7 +6,7 @@ const PlaceSchema = new Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'CategoryPlace',
-    required: true
+    required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,18 +23,29 @@ const PlaceSchema = new Schema({
   },
   name: {
     type: String,
+    text: true,
     required: true
   },
   address: {
     type: String,
     required: true
   },
+  country: {
+    type: Schema.Types.ObjectId,
+    ref: 'Country',
+    text: true,
+  },
+  cities: {
+    type: Schema.Types.ObjectId,
+    ref: 'Cities',
+    text: true,
+  },
   location: [{
     latitude: {
-      type: String
+      type: String,
     },
     longitude: {
-      type: String
+      type: String,
     }
   }], 
   images: [{ 
@@ -50,8 +61,14 @@ const PlaceSchema = new Schema({
     required: true
   },
   phone: String,
-  description: String,
-  extraDescription: String,
+  description: {
+    type: String,
+    text: true,
+  },
+  extraDescription: {
+    type: String,
+    text: true,
+  },
   price: Number,
   rating: Number,
   isActive: {
