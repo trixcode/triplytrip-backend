@@ -4,14 +4,22 @@ const Schema = mongoose.Schema;
 
 const PlaceSchema = new Schema({
   category: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'CategoryPlace',
     required: true
   },
   user: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Users',
     required: true
+  },
+  country: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Country'
+  },
+  cities: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Cities'
   },
   name: {
     type: String,
@@ -21,14 +29,6 @@ const PlaceSchema = new Schema({
     type: String,
     required: true
   },
-  country: {
-    type: Schema.Types.ObjectId,
-    ref: 'Country'
-  },
-  cities: {
-    type: Schema.Types.ObjectId,
-    ref: 'Cities'
-  },
   location: [{
     latitude: {
       type: String
@@ -36,10 +36,15 @@ const PlaceSchema = new Schema({
     longitude: {
       type: String
     }
+  }], 
+  images: [{ 
+    data: Buffer, 
+    contentType: String 
   }],
-  mainImage: {
-    type: String
-  },
+  mainImage: [{ 
+    data: Buffer, 
+    contentType: String 
+  }],
   email: {
     type: String,
     required: true
