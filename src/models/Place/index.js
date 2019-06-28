@@ -50,11 +50,9 @@ const PlaceSchema = new Schema({
   phone: String,
   description: {
     type: String,
-    text: true,
   },
   extraDescription: {
     type: String,
-    text: true,
   },
   price: Number,
   rating: Number,
