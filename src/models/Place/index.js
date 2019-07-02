@@ -3,23 +3,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PlaceSchema = new Schema({
+  mainImage: { 
+    type: String
+  },
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Users',
+  //   required: true
+  // },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'CategoryPlace',
     required: true,
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Users',
-    required: true
-  },
-  country: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Country'
-  },
-  cities: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Cities'
   },
   name: {
     type: String,
@@ -40,37 +35,29 @@ const PlaceSchema = new Schema({
     ref: 'Cities',
     text: true,
   },
-  location: [{
-    latitude: {
-      type: String,
-    },
-    longitude: {
-      type: String,
-    }
-  }], 
-  images: [{ 
-    data: Buffer, 
-    contentType: String 
-  }],
-  mainImage: [{ 
-    data: Buffer, 
-    contentType: String 
-  }],
-  email: {
-    type: String,
-    required: true
-  },
-  phone: String,
-  description: {
-    type: String,
-    text: true,
-  },
-  extraDescription: {
-    type: String,
-    text: true,
-  },
-  price: Number,
-  rating: Number,
+  // location: [{
+  //   latitude: {
+  //     type: String,
+  //   },
+  //   longitude: {
+  //     type: String,
+  //   }
+  // }], 
+  // email: {
+  //   type: String,
+  //   required: true
+  // },
+  // phone: String,
+  // description: {
+  //   type: String,
+  //   text: true,
+  // },
+  // extraDescription: {
+  //   type: String,
+  //   text: true,
+  // },
+  // price: Number,
+  // rating: Number,
   isActive: {
     type: Boolean,
     required: true,
@@ -85,7 +72,7 @@ const PlaceSchema = new Schema({
     type: String,
     default: new Date(),
     required: true
-  },
+ },
   updateDate: String
 });
 

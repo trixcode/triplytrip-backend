@@ -6,30 +6,40 @@ const Place = require('../../models/Place');
 const verifyToken = require('../../middleware/verifyToken');
 const config = require('../../config');
 
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log("destination")
     cb(null, config.uploadPath);
   },
   filename: (req, file, cb) => {
+    console.log("filename")
     cb(null, nanoid() + path.extname(file.originalname));
   }
 });
 
-
-const upload = multer({storage});
+const upload = multer({ storage });
 const router = express.Router();
 
 //post place
-router.post('/', [ upload.single('mainImage')], (req,res)=>{
+router.post('/', [upload.single('mainImage')], (req, res) => {
   const place = new Place(req.body);
+  
+  if (req.file) place.mainImage = req.file.filename;
 
-  console.log(req.file, "file")
-  console.log(req.body)
-
+  console.log( req.file, "file")
+  console.log( req.body, "body")
+  
+  if (5>4) {
     place.isActive = true;
     place.save()
       .then(result => res.send(result))
       .catch(() => res.sendStatus(400))
+  } else if (req.user.roles.name === 'user') {
+    place.save()
+      .then(result => res.send(result))
+      .catch(() => res.sendStatus(401))
+  }
 });
 
 //get places
@@ -44,8 +54,7 @@ router.get('/', (req, res)=> {
     .catch(() => res.sendStatus(404))
 });
 
-const upload = multer({ storage });
-const router = express.Router();
+
 
 // get places
 router.get('/', function (req, res) {
@@ -113,25 +122,7 @@ router.get('/:id', function (req, res) {
     .catch(err => console.log(err))
 });
 
-//post place
-router.post('/', [verifyToken, upload.single('mainImage', 'images')], (req, res) => {
-  const place = new Place(req.body);
 
-  if (req.file) place.mainImage = req.file.filename;
-
-  if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator') {
-    place.isActive = true;
-    place.save()
-      .then(result => res.send(result))
-      .catch(() => res.sendStatus(400))
-  } else if (req.user.roles.name === 'user') {
-    place.save()
-      .then(result => res.send(result))
-      .catch(() => res.sendStatus(401))
-  }
-});
-
->>>>>>> 82de89e73f54b735162731268255b8053e2f3af0
 
 //edit places
 router.patch('/:id', verifyToken, (req, res) => {
