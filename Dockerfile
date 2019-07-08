@@ -1,12 +1,12 @@
 FROM node:10
 
-WORKDIR /usr/src/app
+RUN mkdir -p /vap/www/triplytrip-backend
+WORKDIR /vap/www/triplytrip-backend
 
-COPY package*.json ./
+COPY ./package*json .
 
 RUN npm install
 
-COPY . .
 
 EXPOSE 8000
 
