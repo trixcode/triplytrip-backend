@@ -6,10 +6,13 @@ const PlaceSchema = new Schema({
   mainImage: { 
     type: String
   },
+  images: [{ 
+    type: String
+  }],
   // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Users',
-  //   required: true
+   // type: mongoose.Schema.Types.ObjectId,
+   // ref: 'Users',
+   // required: true
   // },
   category: {
     type: Schema.Types.ObjectId,
@@ -35,29 +38,29 @@ const PlaceSchema = new Schema({
     ref: 'Cities',
     text: true,
   },
-  // location: [{
-  //   latitude: {
-  //     type: String,
-  //   },
-  //   longitude: {
-  //     type: String,
-  //   }
-  // }], 
-  // email: {
-  //   type: String,
-  //   required: true
-  // },
-  // phone: String,
-  // description: {
-  //   type: String,
-  //   text: true,
-  // },
-  // extraDescription: {
-  //   type: String,
-  //   text: true,
-  // },
-  // price: Number,
-  // rating: Number,
+  location: [{
+    latitude: {
+      type: String,
+    },
+    longitude: {
+      type: String,
+    }
+  }], 
+  email: {
+     type: String,
+     required: true
+  },
+  phone: String,
+  description: {
+    type: String,
+    text: true,
+   },
+  extraDescription: {
+    type: String,
+    text: true,
+   },
+  price: Number,
+  rating: Number,
   isActive: {
     type: Boolean,
     required: true,

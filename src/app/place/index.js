@@ -9,11 +9,9 @@ const config = require('../../config');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log("destination")
     cb(null, config.uploadPath);
   },
   filename: (req, file, cb) => {
-    console.log("filename")
     cb(null, nanoid() + path.extname(file.originalname));
   }
 });
@@ -21,25 +19,31 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 const router = express.Router();
 
+const filesUpload = upload.fields([
+  { name: 'mainImage', maxCount: 1 },
+  { name: 'images', maxCount: 10 }
+]);
+
 //post place
-router.post('/', [upload.single('mainImage')], (req, res) => {
+router.post('/', filesUpload, (req, res) => {
   const place = new Place(req.body);
   
-  if (req.file) place.mainImage = req.file.filename;
+  if (req.files) {
+    Object.keys(req.files).map(file => {
+    if (file === 'mainImage') {
+      place.mainImage = req.files[file][0].filename
+    }
+    if (file === 'images') {
+      req.files.images.map(fieldname=>place.images.push(fieldname.filename))}
+    })
+  }  
 
-  console.log( req.file, "file")
-  console.log( req.body, "body")
+  console.log(place, 'place')
   
-  if (5>4) {
-    place.isActive = true;
-    place.save()
-      .then(result => res.send(result))
-      .catch(() => res.sendStatus(400))
-  } else if (req.user.roles.name === 'user') {
-    place.save()
-      .then(result => res.send(result))
-      .catch(() => res.sendStatus(401))
-  }
+  place.isActive = true;
+  place.save()
+    .then(result => res.send(result))
+    .catch(() => res.sendStatus(400))
 });
 
 //get places
