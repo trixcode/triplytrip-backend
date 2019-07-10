@@ -46,20 +46,6 @@ router.post('/', filesUpload, (req, res) => {
     .catch(() => res.sendStatus(400))
 });
 
-//get places
-router.get('/', (req, res)=> {
-  Place.find({isActive: true})
-    .populate('user')
-    .populate('category')
-    .populate('country')
-    .populate('cities')
-    .sort('-createDate')
-    .then(result => res.send(result))
-    .catch(() => res.sendStatus(404))
-});
-
-
-
 // get places
 router.get('/', function (req, res) {
   var page = req.query.skip || 0;

@@ -1,13 +1,13 @@
 FROM node:10
 
-RUN mkdir -p /vap/www/triplytrip-backend
-WORKDIR /vap/www/triplytrip-backend
+RUN mkdir -p /var/www/triplytrip-backend
+WORKDIR /var/www/triplytrip-backend
 
-COPY ./package*json .
+COPY ./package.json .
 
 RUN npm install
 
 
-EXPOSE 8000
+EXPOSE 8080
 
 CMD ["npm", "run", "dev"]
