@@ -9,11 +9,11 @@ const PlaceSchema = new Schema({
   images: [{ 
     type: String
   }],
-  // user: {
-   // type: mongoose.Schema.Types.ObjectId,
-   // ref: 'Users',
-   // required: true
-  // },
+   user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users',
+     required: true
+   },
   category: {
     type: Schema.Types.ObjectId,
     ref: 'CategoryPlace',
