@@ -32,17 +32,17 @@ app.use(express.static('public'));
 
 mongoose.connect(dbURL, mongoOptions).then(()=>{
   console.log('MongoDB started!');
-  app.use('/users', users);
-  app.use('/country', country);
-  app.use('/cities', cities);
-  app.use('/role_users', roleUsers);
-  app.use('/auth', authorization);
-  app.use('/category_place', categoryPlace);
-  app.use('/place', Place);
-  app.use('/articles', Articles);
-  app.use('/events', Events);
-  app.use('/eventTypes', EventTypes);
-  app.use('/discovery', Discovery);
+  app.use('/api/users', users);
+  app.use('/api/country', country);
+  app.use('/api/cities', cities);
+  app.use('/api/role_users', roleUsers);
+  app.use('/api/auth', authorization);
+  app.use('/api/category_place', categoryPlace);
+  app.use('/api/place', Place);
+  app.use('/api/articles', Articles);
+  app.use('/api/events', Events);
+  app.use('/api/eventTypes', EventTypes);
+  app.use('/api/discovery', Discovery);
 
   
 
