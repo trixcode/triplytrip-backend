@@ -387,7 +387,7 @@ const run = async () => {
       address: "Шабдан Баатыра,1 Д/1, Бишкек",
       email: "https://mansion.restoran.kg",
       isActive: true,
-      mainImage: "https://www.instagram.com/p/BhgTYaeBGqb/",
+      mainImage: "https://static-2.akipress.org/st_runews/5/1477885.1.1540719756.jpg",
       phone: "996555130003",
       price: 20,
       rating: 4,
@@ -683,7 +683,7 @@ const run = async () => {
       user: users[0].id,
       cities: cities[3].id,
       isActive: true,
-      mainImage: "https://too.kg/wp-content/uploads/sulaiman-too-6-1024x574.jpg",
+      mainImage: "http://www.karakol-ski.kg/assets/i/img1.jpg",
       countDestinations: 8,
     },
     {
