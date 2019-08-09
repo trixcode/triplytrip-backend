@@ -436,7 +436,7 @@ const run = async () => {
       email: "dostur@mail.kg",
       isActive: true,
       cities: cities[3].id,
-      mainImage: "https://www.issykkul.biz/katalog/pansionatyy/marko-polo.aspx#group402-1",
+      mainImage: "https://media-cdn.tripadvisor.com/media/photo-s/10/8c/a9/58/caption.jpg",
       phone: "996701751595",
       price: 18,
       rating: 4,
