@@ -690,7 +690,7 @@ const run = async () => {
       user: users[0].id,
       cities: cities[4].id,
       isActive: true,
-      mainImage: "http://static-2.akipress.org/127/.storage/limon2/images/november2014/2829eda323549c14cd8fce1278712503.jpeg",
+      mainImage: "https://sputnik.kg/images/102738/76/1027387661.jpg",
       countDestinations: 9,
     },
     {
