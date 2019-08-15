@@ -25,9 +25,8 @@ const filesUpload = upload.fields([
 ]);
 
 //post place
-router.post('/', filesUpload, (req, res) => {
-  const place = new Place(req.body);
-  
+router.post('', [filesUpload,verifyToken], (req, res) => {
+  const place = new Place();
   if (req.files) {
     Object.keys(req.files).map(file => {
     if (file === 'mainImage') {
@@ -37,13 +36,21 @@ router.post('/', filesUpload, (req, res) => {
       req.files.images.map(fieldname=>place.images.push(fieldname.filename))}
     })
   }  
-
-  console.log(place, 'place')
   
+  place.user = req.user;
+  place.category = req.body.categoriesId;
+  place.cities = req.body.citiesId
+  place.address = req.body.address;
+  place.name = req.body.name;
+  place.email = req.body.email;
+  place.mainImage = req.body.mainImage;
+  place.images = req.body.images;
+
   place.isActive = true;
+  console.log(place);
   place.save()
     .then(result => res.send(result))
-    .catch(() => res.sendStatus(400))
+    .catch((e) => {console.log(e); return res.sendStatus(400)})
 });
 
 // get places

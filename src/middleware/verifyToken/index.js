@@ -3,7 +3,7 @@ const Users = require('../../models/Users');
 
 
 const index = (req, res, next) => {
-  const bearerHeader = req.headers['authorization'];
+  const bearerHeader = req.headers['token'];
   if (typeof bearerHeader !== 'undefined') {
     const bearer = bearerHeader.split(' ');
     req.token = bearer[1];
