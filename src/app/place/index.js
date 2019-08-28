@@ -1,7 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-const nanoid = require('nanoid');
-const path = require('path');
 const Place = require('../../models/Place');
 const verifyToken = require('../../middleware/verifyToken');
 const config = require('../../config');

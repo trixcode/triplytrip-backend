@@ -25,12 +25,12 @@ router.post('/login', async (req, res)=>{
   const user = await Users.findOne({username: req.body.username});
 
   if (!user) {
-    return res.status(404).send({error: "Username or Password is wrong"})
+    return res.status(404).send({error: "Username is not exist"})
   }
 
   const isMatch = await user.checkPassword(req.body.password);
   if (!isMatch){
-    return res.status(404).send({error: "Username or Password is wrong"})
+    return res.status(400).send({error: "Username or Password is wrong"})
   }
 
 
