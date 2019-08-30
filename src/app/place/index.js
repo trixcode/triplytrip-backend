@@ -23,18 +23,19 @@ const filesUpload = upload.fields([
 ]);
 
 //post place
-router.post('', [filesUpload,verifyToken], (req, res) => {
+router.post('', [filesUpload, verifyToken], (req, res) => {
   const place = new Place();
   if (req.files) {
     Object.keys(req.files).map(file => {
-    if (file === 'mainImage') {
-      place.mainImage = req.files[file][0].filename
-    }
-    if (file === 'images') {
-      req.files.images.map(fieldname=>place.images.push(fieldname.filename))}
+      if (file === 'mainImage') {
+        place.mainImage = req.files[file][0].filename
+      }
+      if (file === 'images') {
+        req.files.images.map(fieldname => place.images.push(fieldname.filename))
+      }
     })
-  }  
-  
+  }
+
   place.user = req.user;
   place.category = req.body.categoriesId;
   place.cities = req.body.citiesId
@@ -48,7 +49,7 @@ router.post('', [filesUpload,verifyToken], (req, res) => {
   console.log(place);
   place.save()
     .then(result => res.send(result))
-    .catch((e) => {console.log(e); return res.sendStatus(400)})
+    .catch((e) => { console.log(e); return res.sendStatus(400) })
 });
 
 // get places
@@ -69,7 +70,7 @@ router.get('/', function (req, res) {
       .populate('cities')
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
-  }else if (category) {
+  } else if (category) {
     Place.find(
       { category: category, isActive: true })
       .populate('user')
@@ -79,7 +80,7 @@ router.get('/', function (req, res) {
       .sort('-createDate')
       .then(result => res.send(result))
       .catch(() => res.sendStatus(404))
-  }else if (cities) {
+  } else if (cities) {
     Place.find(
       { cities: cities, isActive: true })
       .populate('user')
@@ -116,6 +117,19 @@ router.get('/:id', function (req, res) {
     })
     .catch(err => console.log(err))
 });
+
+// get users listing
+router.get('/myListing', verifyToken, (req, res) => { 
+  Place.find(
+    { category: category, isActive: true })
+    .populate('user')
+    .populate('category')
+    .populate('country')
+    .populate('cities')
+    .sort('-createDate')
+    .then(result => res.send(result))
+    .catch(() => res.sendStatus(404))
+})
 
 
 
