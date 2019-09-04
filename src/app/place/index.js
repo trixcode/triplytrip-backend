@@ -52,6 +52,20 @@ router.post('', [filesUpload, verifyToken], (req, res) => {
     .catch((e) => { console.log(e); return res.sendStatus(400) })
 });
 
+// get users listing
+router.get('/my', verifyToken,  (req, res) => {
+  Place.find({user: req.user})
+    .then(result => res.send(result))
+    .catch(err => {
+      console.log(err);
+      res.status(404).json({
+        error: err
+      });
+    })
+});
+
+
+
 // get places
 router.get('/', function (req, res) {
   var page = req.query.skip || 0;
@@ -117,21 +131,6 @@ router.get('/:id', function (req, res) {
     })
     .catch(err => console.log(err))
 });
-
-// get users listing
-router.get('/myListing', verifyToken, (req, res) => { 
-  Place.find(
-    { category: category, isActive: true })
-    .populate('user')
-    .populate('category')
-    .populate('country')
-    .populate('cities')
-    .sort('-createDate')
-    .then(result => res.send(result))
-    .catch(() => res.sendStatus(404))
-})
-
-
 
 //edit places
 router.patch('/:id', verifyToken, (req, res) => {
