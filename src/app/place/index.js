@@ -53,8 +53,11 @@ router.post('', [filesUpload, verifyToken], (req, res) => {
 });
 
 // get users listing
-router.get('/my', verifyToken,  (req, res) => {
-  Place.find({user: req.user})
+router.get('/my', verifyToken, (req, res) => {
+  Place.find({ user: req.user })
+    .populate('category')
+    .populate('country')
+    .populate('cities')
     .then(result => res.send(result))
     .catch(err => {
       console.log(err);

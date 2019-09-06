@@ -5,6 +5,7 @@ const nanoid = require('nanoid');
 const config = require('../../config');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('../../middleware/verifyToken');
 
 const Users = require('../../models/Users');
 
@@ -20,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 //get all users
-router.get('/user', function (req, res) {
+router.get('/users', function (req, res) {
   Users.find({}, function (err, users) {
     if (err) {
       res.send('error');
@@ -63,6 +64,7 @@ router.post('/login', async (req, res) => {
     await user.save();
     res.json({
       token: token,
+      user: req.user,
     })
   });
 });
