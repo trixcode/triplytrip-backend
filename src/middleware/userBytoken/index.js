@@ -9,27 +9,28 @@ const index = (req, res, next) => {
     req.token = bearer[1];
 
     if (req.user) next();
-    if (req.token === 'undefined') {
-      next ();
+    if (bearer[1] === 'undefined') {
+      next();
+    } else {
+      jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (err) {
+          res.sendStatus(403);
+
+        } else {
+          Users.findById(authData.user._id)
+            .populate('roles')
+            .exec((err, obj) => {
+              if (err) {
+                res.sendStatus(403)
+              } else {
+
+                req.user = obj;
+                next()
+              }
+            });
+        }
+      })
     }
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
-      if (err) {
-        res.sendStatus(403);
-
-      } else {
-        Users.findById(authData.user._id)
-          .populate('roles')
-          .exec((err, obj) => {
-            if (err) {
-              res.sendStatus(403)
-            } else {
-
-              req.user = obj;
-              next()
-            }
-          });
-      }
-    })
   } else {
     next()
   }
