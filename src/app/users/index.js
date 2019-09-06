@@ -4,7 +4,7 @@ const nanoid = require('nanoid');
 const Users = require('../../models/Users');
 const Place = require('../../models/Place');
 const verifyToken = require('../../middleware/verifyToken');
-const userByToken = require('../../middleware/userBytoken');
+const userByToken = require('../../middleware/userByToken');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
