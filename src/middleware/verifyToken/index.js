@@ -11,6 +11,8 @@ const index = (req, res, next) => {
     if (req.user) next();
 
     jwt.verify(req.token, 'secretkey', (err, authData) => {
+      console.log(err)
+      console.log(authData)
       if (err) {
         res.sendStatus(403);
 
@@ -29,7 +31,7 @@ const index = (req, res, next) => {
       }
     })
   } else {
-    res.sendStatus(500)
+    res.sendStatus(403)
   }
 };
 

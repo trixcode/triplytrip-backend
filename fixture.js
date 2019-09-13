@@ -29,13 +29,16 @@ const run = async () => {
   }
   const roleUsers = await RoleUsers.create(
     {
-      name: 'admin'
+      name: 'admin',
+      _id: '5d7b86bf045c516431d31d1e'
     },
     {
-      name: 'moderator'
+      name: 'moderator',
+      _id: '5d7b86bf045c516431d31d1f'
     },
     {
-      name: 'user'
+      name: 'user',
+      _id: '5d7b86bf045c516431d31d20'
     }
   );
 
