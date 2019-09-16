@@ -9,7 +9,7 @@ const index = (req, res, next) => {
     req.token = bearer[1];
 
     if (req.user) next();
-    if (bearer[1] === 'undefined') {
+    if (req.token === 'undefined' || req.token === 'null') {
       next();
     } else {
       jwt.verify(req.token, 'secretkey', (err, authData) => {

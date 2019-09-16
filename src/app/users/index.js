@@ -34,12 +34,14 @@ router.get('/myuser', userByToken, (req, res) => {
     const response = {
       user : req.user,
       token: req.token,
+      isLogined: true,
     }
     res.json(response);
   } else {
     const response = {
       user: '',
       token: '',
+      isLogined: false,
     }
     res.json(response);
   }

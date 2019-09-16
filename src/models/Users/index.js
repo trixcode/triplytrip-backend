@@ -56,6 +56,7 @@ const UsersSchema = new Schema({
 UsersSchema.methods.generateToken = function () {
   return this.token = nanoid()
 };
+
 UsersSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password)
 };

@@ -20,6 +20,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+
+
 //get all users
 router.get('/users', function (req, res) {
   Users.find({}, function (err, users) {
@@ -31,8 +33,10 @@ router.get('/users', function (req, res) {
   });
 })
 
+
+
 //get one user
-router.get('/user/:id', function (req, res) {
+router.get('/users/:id', function (req, res) {
   Users.findById(req.params.id)
     .then(user => {
       if (!user) {
@@ -47,7 +51,8 @@ router.get('/user/:id', function (req, res) {
 
 router.post('/login', async (req, res) => {
 
-  const user = await Users.findOne({ username: req.body.username });
+  const user = await Users.findOne({ username: req.body.username })
+  .populate('roles');
 
   if (!user) {
     return res.status(404).send({ error: "Username is not exist" })
@@ -58,7 +63,6 @@ router.post('/login', async (req, res) => {
     return res.status(400).send({ error: "Username or Password is wrong" })
   }
 
-
   jwt.sign({ user }, 'secretkey', async (err, token) => {
     req.user = user;
     await user.save();
@@ -68,6 +72,9 @@ router.post('/login', async (req, res) => {
     })
   });
 });
+
+
+
 router.delete('/logout', async (req, res) => {
   const token = req.get('Authorization');
   const success = { message: 'Logged out' };
@@ -87,6 +94,9 @@ router.delete('/logout', async (req, res) => {
 
   return res.send(success);
 });
+
+
+
 router.post('/register', upload.single('avatar'), async (req, res) => {
   const user = new Users(req.body);
   user.generateToken();
@@ -97,8 +107,11 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
     jwt.sign({ user }, 'secretkey', async (err, token) => {
       req.user = user;
       await user.save();
+      const responseUser = await Users.findOne({ username: user.username })
+      .populate('roles');
       res.json({
         token: token,
+        user: responseUser
       })
     });
 
