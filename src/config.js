@@ -10,5 +10,7 @@ module.exports = {
     useNewUrlParser: true,
     useCreateIndex: true
   },
-  secret: 'supersecret'
+  secret: 'supersecret',
+  apiHost: process.env.API_HOST || 'http://localhost:8000/'
 };
+

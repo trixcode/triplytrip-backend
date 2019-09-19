@@ -27,7 +27,8 @@ const app = express();
 const port = 8000;
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+// TODO change static path
+app.use(express.static('src/public'));
 
 const api = '/api/v1/';
 

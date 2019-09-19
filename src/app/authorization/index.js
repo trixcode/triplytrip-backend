@@ -106,12 +106,11 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
   try {
     jwt.sign({ user }, 'secretkey', async (err, token) => {
       req.user = user;
-      await user.save();
-      const responseUser = await Users.findOne({ username: user.username })
-      .populate('roles');
+      await user.save()
+      .then(user => user.populate('roles').execPopulate());
       res.json({
         token: token,
-        user: responseUser
+        user: user,
       })
     });
 

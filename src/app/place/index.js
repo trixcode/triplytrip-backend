@@ -28,7 +28,8 @@ router.post('', [filesUpload, verifyToken], (req, res) => {
   if (req.files) {
     Object.keys(req.files).map(file => {
       if (file === 'mainImage') {
-        place.mainImage = req.files[file][0].filename
+        
+        place.mainImage = config.apiHost + 'uploads/' + req.files[file][0].filename
       }
       if (file === 'images') {
         req.files.images.map(fieldname => place.images.push(fieldname.filename))
@@ -42,11 +43,13 @@ router.post('', [filesUpload, verifyToken], (req, res) => {
   place.address = req.body.address;
   place.name = req.body.name;
   place.email = req.body.email;
-  place.mainImage = req.body.mainImage;
-  place.images = req.body.images;
+  place.description = req.body.description;
+  place.extraDescription = req.body.extraDescription;
+  place.price = req.body.price;
+  place.rating = req.body.rating;
+  place.phone = req.body.phone;
 
   place.isActive = true;
-  console.log(place);
   place.save()
     .then(result => res.send(result))
     .catch((e) => { console.log(e); return res.sendStatus(400) })
