@@ -11,6 +11,6 @@ module.exports = {
     useCreateIndex: true
   },
   secret: 'supersecret',
-  apiHost: process.env.API_HOST || 'http://localhost:8000/'
+  apiHost:  'http://52.58.62.46/'
 };
 
