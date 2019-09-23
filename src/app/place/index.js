@@ -28,7 +28,6 @@ router.post('', [filesUpload, verifyToken], (req, res) => {
   if (req.files) {
     Object.keys(req.files).map(file => {
       if (file === 'mainImage') {
-        
         place.mainImage = config.apiHost + 'uploads/' + req.files[file][0].filename
       }
       if (file === 'images') {
@@ -56,7 +55,7 @@ router.post('', [filesUpload, verifyToken], (req, res) => {
 });
 
 // get users listing
-router.get('/my', verifyToken, (req, res) => {
+router.get('/mylisting', verifyToken, (req, res) => {
   Place.find({ user: req.user })
     .populate('category')
     .populate('country')

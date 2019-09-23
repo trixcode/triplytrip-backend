@@ -13,4 +13,3 @@ module.exports = {
   secret: 'supersecret',
   apiHost: process.env.API_HOST || 'http://52.58.62.46/' 
 };
-console.log(process.env.API_HOST);
