@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "script" : "/home/ubuntu/triplytrip-backend/src/server.js",
+      "env" : {
+        "NODE_ENV" : "production",
+        "API_HOST" : "http://52.58.62.46/"
+      }
+    }
+  ]
+}
