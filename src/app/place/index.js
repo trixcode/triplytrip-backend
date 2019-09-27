@@ -57,6 +57,7 @@ router.post('', [filesUpload, verifyToken], (req, res) => {
 // get users listing
 router.get('/mylisting', verifyToken, (req, res) => {
   Place.find({ user: req.user })
+    .populate('user')
     .populate('category')
     .populate('country')
     .populate('cities')
@@ -128,6 +129,7 @@ router.get('/', function (req, res) {
 // get places by id
 router.get('/:id', function (req, res) {
   Place.findById(req.params.id)
+    .populate('user')
     .then(PlaceFound => {
       if (!PlaceFound) {
         return res.status(404).end();
@@ -212,18 +214,18 @@ router.put('/:id', (req, res) => {
 });
 
 //delete place by id
-router.delete('/:id', verifyToken, (req, res) => {
+router.delete('/delete/:id', verifyToken, (req, res) => {
   if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator') {
     Place.findById(req.params.id, (err, place) => {
       place.remove(() => {
-        res.send('Delete Place');
+        res.json('Delete Place');
       })
     })
   } else if (req.user.roles.name === 'user') {
     Place.findById(req.params.id, (err, place) => {
       if (req.user._id.equals(place.user)) {
         place.remove(() => {
-          res.send('Delete Place');
+          res.json('Delete Place');
         })
       } else {
         res.sendStatus(403)
