@@ -218,14 +218,18 @@ router.delete('/delete/:id', verifyToken, (req, res) => {
   if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator') {
     Place.findById(req.params.id, (err, place) => {
       place.remove(() => {
-        res.json('Delete Place');
+        res.json({
+          message: 'Delete Place'
+        });
       })
     })
   } else if (req.user.roles.name === 'user') {
     Place.findById(req.params.id, (err, place) => {
       if (req.user._id.equals(place.user)) {
         place.remove(() => {
-          res.json('Delete Place');
+          res.json({
+            message: 'Delete Place'
+          });
         })
       } else {
         res.sendStatus(403)
