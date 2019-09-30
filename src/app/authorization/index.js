@@ -5,7 +5,6 @@ const nanoid = require('nanoid');
 const config = require('../../config');
 const path = require('path');
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../../middleware/verifyToken');
 
 const Users = require('../../models/Users');
 
@@ -67,7 +66,9 @@ router.post('/login', async (req, res) => {
     req.user = user;
     await user.save();
     res.json({
-      token: token,
+      token: {
+        token: token,
+      },
       user: req.user,
     })
   });
@@ -109,7 +110,9 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
       await user.save()
       .then(user => user.populate('roles').execPopulate());
       res.json({
-        token: token,
+        token: {
+          token: token,
+        },
         user: user,
       })
     });
