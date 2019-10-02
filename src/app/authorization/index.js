@@ -66,9 +66,7 @@ router.post('/login', async (req, res) => {
     req.user = user;
     await user.save();
     res.json({
-      token: {
-        token: token,
-      },
+      token: token,
       user: req.user,
     })
   });
@@ -110,9 +108,7 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
       await user.save()
       .then(user => user.populate('roles').execPopulate());
       res.json({
-        token: {
-          token: token,
-        },
+        token: token,
         user: user,
       })
     });
