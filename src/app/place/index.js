@@ -56,7 +56,8 @@ router.post('', [filesUpload, verifyToken], (req, res) => {
 
 // get users listing
 router.get('/mylisting', verifyToken, (req, res) => {
-  Place.find({ user: req.user })
+  if (req.user.roles.name === 'admin' || req.user.roles.name === 'moderator') {
+    Place.find({})
     .populate('user')
     .populate('category')
     .populate('country')
@@ -68,6 +69,21 @@ router.get('/mylisting', verifyToken, (req, res) => {
         error: err
       });
     })
+  }
+  if (req.user.roles.name === 'user') {
+    Place.find({ user: req.user })
+      .populate('user')
+      .populate('category')
+      .populate('country')
+      .populate('cities')
+      .then(result => res.send(result))
+      .catch(err => {
+        console.log(err);
+        res.status(404).json({
+          error: err
+        });
+      })
+  }
 });
 
 
